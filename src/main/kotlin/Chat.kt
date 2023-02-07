@@ -39,9 +39,7 @@ class Chat(
 
 }
 
-//private fun <E> MutableList<E>.filter(predicate: (E) -> Unit): List<E> {
-//
-//}
+
 
 
 
