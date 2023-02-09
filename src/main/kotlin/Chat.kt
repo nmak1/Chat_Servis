@@ -7,13 +7,14 @@ class Chat(
     fun addMessage(text: String): List<Message> {
 
         listMessage.add(Message(text, idMessage = Message().idMessage + 1))
-        return listMessage.sortedBy { date }
+            .apply {listMessage.sortedBy { date } }
+       return this.listMessage
 
     }
 
     fun readMessages(): List<Message> {
         for (message in listMessage)
-            true.also { message.isRead = it }
+            message.isRead = true
         return this.listMessage
 
     }
