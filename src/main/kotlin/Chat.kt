@@ -13,13 +13,14 @@ class Chat(
 
     fun readMessages(): List<Message> {
         for (message in listMessage)
-            message.isRead = true
-        return listMessage
+            true.also { message.isRead = it }
+        return this.listMessage
+
     }
 
     fun deleteMesseges(idMessage: Int) {
         if (idMessage == Message().idMessage)
-            listMessage.removeAt(idMessage)
+            this.listMessage.removeAt(idMessage)
 
     }
 
