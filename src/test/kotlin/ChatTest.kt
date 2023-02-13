@@ -7,7 +7,7 @@ class ChatTest {
         val chat=Chat()
         chat.addMessage("test")
         chat.addMessage("test 2")
-        Assert.assertEquals(chat.listMessage.size,2)
+        Assert.assertEquals(chat.items.size,2)
 
     }
 
@@ -16,8 +16,8 @@ class ChatTest {
         val chat = Chat()
         chat.addMessage("test")
         chat.addMessage("test 2")
-        chat.deleteMesseges(0)
-        Assert.assertEquals(chat.listMessage.size, 1)
+        chat.delete(Message(id = 0))
+        Assert.assertEquals(chat.items.size, 1)
     }
 
     @Test
@@ -27,7 +27,7 @@ class ChatTest {
         chat.addMessage("test")
         chat.addMessage("test 2")
         chat.readMessages()
-        Assert.assertEquals(chat.listMessage.size, 2)
+        Assert.assertEquals(chat.items.size, 2)
         Assert.assertFalse(message.isRead)
     }
 

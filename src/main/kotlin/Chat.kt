@@ -1,45 +1,53 @@
 class Chat(
-    var idUser: Int?=null,
+    var idUser: Int? = null,
     val date: Long = System.currentTimeMillis(),
-) {
-    var listMessage: MutableList<Message> = mutableListOf()
+) : Serves<Message>() {
+
 
     fun addMessage(text: String): List<Message> {
 
-        listMessage.add(Message(text, idMessage = Message().idMessage + 1))
-            .apply {listMessage.sortedBy { date } }
-       return this.listMessage
+        add(Message(text=text))
+            .apply { items.sortedBy { date } }
+        return this.items
 
     }
 
     fun readMessages(): List<Message> {
-        for (message in listMessage)
+        items.forEach { message ->
             message.isRead = true
-        return this.listMessage
+        }
+        return this.items
 
     }
 
     fun deleteMesseges(idMessage: Int) {
-        if (idMessage == Message().idMessage)
-            this.listMessage.removeAt(idMessage)
+        if (idMessage == Message().id)
+            this.items.removeAt(idMessage)
 
     }
 
     fun unreadMessages(): List<Message> {
-        return listMessage.filter {listMessage-> !listMessage.isRead }
+        return items.filter { items -> !items.isRead }
     }
 
     override fun toString(): String {
         var result = "[ chat "
-        listMessage.forEach { message ->
+        items.forEach { message ->
             result += " $message"
         }
         return result + "]"
     }
 
 
+    override fun delete(elem: Elem) {
+        if (elem.id == Message().id)
+            elem.id?.let { this.items.removeAt(it) }
+    }
+
 
 }
+
+
 
 
 
